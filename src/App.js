@@ -13,26 +13,33 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked');
-    // DO NOT DO THIS: this.state.persons[0].name = 'Andre';
-    this.setState({
-      persons: [
-      { name: newName, age: 26 },
-      { name: 'Tim', age: 32},
-      { name: 'Steph', age: 68}
-    ]
-   })
-  }
+  // switchNameHandler = (newName) => {
+  //   // console.log('Was clicked');
+  //   // DO NOT DO THIS: this.state.persons[0].name = 'Andre';
+  //   this.setState({
+  //     persons: [
+  //     { name: newName, age: 26 },
+  //     { name: 'Tim', age: 32},
+  //     { name: 'Steph', age: 68}
+  //   ]
+  //  })
+  // }
 
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
-      { name: 'Andre', age: 26 },
-      { name: event.target.value, age: 32},
-      { name: 'Steph', age: 28}
+      { id: 'asdf', name: 'Andre', age: 26 },
+      { id: 'dsas3', name: event.target.value, age: 32},
+      { id: 'sdas2', name: 'Steph', age: 28}
     ]
    })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons]; // ES6 way
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonsHandler = () => {
@@ -55,8 +62,12 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person name={person.name} age={person.age} />
+          {this.state.persons.map((person, index) => {
+            return <Person 
+              click={() => this.deletePersonHandler(index)}
+              name={person.name} 
+              age={person.age}
+              key={person.id} />
           })}
           </div>
       );
