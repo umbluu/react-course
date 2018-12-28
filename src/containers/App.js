@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 class App extends Component {
   state = {
@@ -25,6 +25,9 @@ class App extends Component {
     // const person = Object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
+
+    console.log(event.target.value);
+    console.log(person);
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
